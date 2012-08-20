@@ -10,3 +10,9 @@
 *.lai
 *.la
 *.a
+
+src/Debug/
+src/MFCDia/Debug/
+src/MFCDia.sdf
+src/MFCDia.suo
+src/MFCDia/MFCDia.vcxproj.user
