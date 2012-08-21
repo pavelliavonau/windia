@@ -159,14 +159,54 @@ void CMFCDiaDoc::addEntity(DiaEntity* entity)
 	UpdateAllViews(NULL);
 }
 
-DiaEntity* CMFCDiaDoc::findEntity(const CPoint& point)
+DiaEntity* CMFCDiaDoc::findEntity(const CPoint& point) const
 {	
-	std::vector<DiaEntity*>::const_iterator it = m_entities.begin();
-	while(it != m_entities.end())
+	std::vector<DiaEntity*>::const_iterator it = m_entities.cbegin();
+	while(it != m_entities.cend())
 	{		
 		if ((*it)->contains(point))
 			return *it;
 		it++;
 	}		
 	return NULL;
+}
+
+bool CMFCDiaDoc::selectEntity(const CPoint& rpoint)
+{
+	DiaEntity* pEntity = findEntity(rpoint);
+
+	if (pEntity == NULL)
+	{
+		return false;
+	}
+
+	pEntity->setSelected(true);
+	m_selectedEntities.push_back(pEntity);		
+	return true;
+}
+
+bool CMFCDiaDoc::haveSelected() const
+{
+	return !m_selectedEntities.empty();
+}
+
+void CMFCDiaDoc::clearSelection()
+{
+	std::vector<DiaEntity*>::iterator it = m_selectedEntities.begin();
+	while(it != m_selectedEntities.end())
+	{
+		(*it)->setSelected(false);
+		it++;
+	}
+	m_selectedEntities.clear();
+}
+
+void CMFCDiaDoc::moveSelected(std::pair<LONG,LONG> vec)
+{
+	std::vector<DiaEntity*>::iterator it = m_selectedEntities.begin();
+	while(it != m_selectedEntities.end())
+	{
+		(*it)->applyVec(vec);
+		it++;
+	}	
 }

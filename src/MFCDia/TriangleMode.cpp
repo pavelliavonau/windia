@@ -1,10 +1,12 @@
 #include "StdAfx.h"
 #include "TriangleMode.h"
 #include "DiaTriangle.h"
+#include "MFCDiaView.h"
 
 
-TriangleMode::TriangleMode(void)
+TriangleMode::TriangleMode(CMFCDiaView* parent)
 {
+	mp_parentView = parent;
 }
 
 
@@ -66,7 +68,3 @@ LPCTSTR TriangleMode::getCurrentCursor() const
 	return IDC_ARROW;
 }
 
-AbstractMode::modes TriangleMode::getModeType() const
-{
-	return AbstractMode::TRIANGLE_MODE;
-}

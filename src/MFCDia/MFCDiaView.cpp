@@ -13,11 +13,6 @@
 #include "MFCDiaView.h"
 #include <vector>
 #include "DiaEntity.h"
-//#include "RectangleMode.h"
-//#include "HandMode.h"
-//#include "ArrowMode.h"
-//#include "EllipseMode.h"
-//#include "TriangleMode.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -43,7 +38,12 @@ END_MESSAGE_MAP()
 
 // CMFCDiaView construction/destruction
 
-CMFCDiaView::CMFCDiaView()	
+CMFCDiaView::CMFCDiaView()	:
+	m_rectangleMode(this),
+	m_ellipseMode(this),
+	m_triangleMode(this),
+	m_arrowMode(this),
+	m_handMode(this)
 {
 	m_pmode = &m_rectangleMode;		//!< init mode
 	// TODO: add construction code here
@@ -144,109 +144,50 @@ void CMFCDiaView::OnHand()
 
 void CMFCDiaView::OnRButtonDown(UINT Flags, CPoint Loc)
 {
-	m_pmode->resetMode();
-	RedrawWindow();
+	m_pmode->OnRButtonDown(Flags, Loc);
 }
 
 void CMFCDiaView::OnLButtonDown(UINT Flags, CPoint Loc)
 {
-	AbstractMode::modes modeType = m_pmode->getModeType();
-
-	switch (modeType)
-	{
-	case AbstractMode::RECTANGLE_MODE:
-	case AbstractMode::ELLIPSE_MODE:
-	case AbstractMode::TRIANGLE_MODE:
-		{
-			m_pmode->pushPoint(Loc);
-			if( m_pmode->isEnoughtItems() )
-			{
-				DiaEntity* e = m_pmode->createEntity();
-				CMFCDiaDoc* pDoc = GetDocument();
-				pDoc->addEntity(e);
-				m_pmode->resetMode();		
-			}
-			break;
-		}
-	case AbstractMode::ARROW_MODE:
-		{
-			DiaEntity* pEntity = GetDocument()->findEntity(Loc);
-			if (pEntity == NULL)
-				return;
-			m_pmode->pushEntity(pEntity);
-			if( m_pmode->isEnoughtItems() )
-			{
-				DiaEntity* e = m_pmode->createEntity();
-				CMFCDiaDoc* pDoc = GetDocument();
-				pDoc->addEntity(e);
-				m_pmode->resetMode();		
-			}
-			break;
-		}
-
-	case AbstractMode::HAND_MODE:
-		{
-			selectEntity(Loc);
-			break;
-		}	
-	}
+	m_pmode->OnLButtonDown(Flags, Loc);	
 }
 
 void CMFCDiaView::OnLButtonUp(UINT Flags, CPoint Loc)
 {
-	if (AbstractMode::HAND_MODE == m_pmode->getModeType() &&
-		!m_selectedEntities.empty())
-	{
-		std::vector<DiaEntity*>::iterator it = m_selectedEntities.begin();
-		while(it != m_selectedEntities.end())
-		{
-			(*it)->setSelected(false);
-			it++;
-		}	
-		m_pmode->pullPoint();
-		m_selectedEntities.clear();
-	}
+	m_pmode->OnLButtonUp(Flags,Loc);
 }
 
 void CMFCDiaView::OnMouseMove(UINT nFlags, CPoint point)
 {
-	if (m_pmode->isPreviewAvailable())
-	{
-		m_pmode->setMousePos(point);
-		RedrawWindow();
-	}
-
-	if (AbstractMode::HAND_MODE == m_pmode->getModeType() &&
-		!m_selectedEntities.empty())
-	{
-		CPoint oldPoint = m_pmode->pullPoint();
-		std::pair<LONG,LONG> vec;
-		vec.first = point.x - oldPoint.x;
-		vec.second = point.y - oldPoint.y;
-
-		std::vector<DiaEntity*>::iterator it = m_selectedEntities.begin();
-		while(it != m_selectedEntities.end())
-		{
-			(*it)->applyVec(vec);
-			it++;
-		}	
-		m_pmode->pushPoint(point);
-		RedrawWindow();
-	}	
+	m_pmode->OnMouseMove(nFlags, point);
 }
 
-void CMFCDiaView::selectEntity(const CPoint& rpoint)
+bool CMFCDiaView::selectEntity(const CPoint& rpoint)
 {
-	CMFCDiaDoc* pDoc = GetDocument();
+	return GetDocument()->selectEntity(rpoint);	
+}
 
-	DiaEntity* pEntity = pDoc->findEntity(rpoint);
+DiaEntity* CMFCDiaView::findEntity(const CPoint& point) const
+{
+	return GetDocument()->findEntity(point);
+}
 
-	if (pEntity == NULL)
-	{
-		return;
-	}
+void CMFCDiaView::addEntity(DiaEntity* e)
+{
+	return GetDocument()->addEntity(e);
+}
 
-	pEntity->setSelected(true);
-	m_selectedEntities.push_back(pEntity);	
-	m_pmode->pushPoint(rpoint);
+bool CMFCDiaView::haveSelected() const
+{
+	return GetDocument()->haveSelected();
+}
+
+void CMFCDiaView::clearSelection()
+{
+	GetDocument()->clearSelection();
+}
+
+void CMFCDiaView::moveSelected(std::pair<LONG,LONG> vec)
+{
+	GetDocument()->moveSelected(vec);
 }

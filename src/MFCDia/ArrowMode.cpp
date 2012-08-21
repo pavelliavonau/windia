@@ -1,10 +1,12 @@
 #include "StdAfx.h"
 #include "ArrowMode.h"
 #include "DiaArrow.h"
+#include "MFCDiaView.h"
 
 
-ArrowMode::ArrowMode(void)
+ArrowMode::ArrowMode(CMFCDiaView * parent)	
 {
+	mp_parentView = parent;
 }
 
 
@@ -39,7 +41,30 @@ LPCTSTR ArrowMode::getCurrentCursor() const
 	return IDC_ARROW;
 }
 
-AbstractMode::modes ArrowMode::getModeType() const
+void ArrowMode::OnLButtonDown(UINT Flags, CPoint Loc)
 {
-	return AbstractMode::ARROW_MODE;
+	DiaEntity* pEntity = mp_parentView->findEntity(Loc);
+	if (pEntity == NULL)
+		return;
+	pushEntity(pEntity);
+	if( isEnoughtItems() )
+	{
+		DiaEntity* e = createEntity();		
+		mp_parentView->addEntity(e);
+		resetMode();		
+	}
+}
+
+void ArrowMode::OnLButtonUp(UINT Flags, CPoint Loc)
+{
+
+}
+
+void ArrowMode::OnMouseMove(UINT nFlags, CPoint point)
+{
+	if ( isPreviewAvailable() )
+	{
+		setMousePos(point);
+		mp_parentView->RedrawWindow();
+	}
 }

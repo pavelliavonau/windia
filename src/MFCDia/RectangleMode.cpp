@@ -1,10 +1,12 @@
 #include "StdAfx.h"
 #include "RectangleMode.h"
 #include "DiaRectangle.h"
+#include "MFCDiaView.h"
 
 
-RectangleMode::RectangleMode(void)
+RectangleMode::RectangleMode(CMFCDiaView* parent)
 {
+	mp_parentView = parent;
 }
 
 RectangleMode::~RectangleMode(void)
@@ -37,9 +39,4 @@ void RectangleMode::drawPreview(CDC* pDC) const
 LPCTSTR RectangleMode::getCurrentCursor() const
 {
 	return IDC_ARROW;
-}
-
-AbstractMode::modes RectangleMode::getModeType() const
-{
-	return AbstractMode::RECTANGLE_MODE;
 }

@@ -22,8 +22,12 @@ public:
 public:
 	const std::vector<DiaEntity*>* getDrawEntities() const;	
 	void addEntity(DiaEntity*);
-	DiaEntity* findEntity(const CPoint& point);
+	DiaEntity* findEntity(const CPoint& point) const;
+	bool selectEntity(const CPoint& );
 	void clearDocument();	
+	bool haveSelected() const;
+	void clearSelection();
+	void moveSelected(std::pair<LONG,LONG>);
 
 // Overrides
 public:
@@ -55,4 +59,5 @@ protected:
 
 private:
 	std::vector<DiaEntity*>		m_entities;	
+	std::vector<DiaEntity*>		m_selectedEntities;
 };

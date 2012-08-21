@@ -10,6 +10,9 @@
 #include "EllipseMode.h"
 #include "TriangleMode.h"
 
+class DiaEntity;
+class CMFCDiaDoc;
+
 class CMFCDiaView : public CView
 {
 protected: // create from serialization only
@@ -22,6 +25,12 @@ public:
 
 // Operations
 public:
+	DiaEntity* findEntity(const CPoint& point) const;
+	void addEntity(DiaEntity*);
+	bool selectEntity(const CPoint& rpoint);
+	bool haveSelected() const;
+	void clearSelection();
+	void moveSelected(std::pair<LONG,LONG>);
 
 // Overrides
 public:
@@ -38,7 +47,7 @@ public:
 	afx_msg void OnTriangle();
 	afx_msg void OnArrow();
 	afx_msg void OnHand();	
-	BOOL CMFCDiaView::OnSetCursor(CWnd* pWnd, UINT nHitTest, UINT message);
+	BOOL OnSetCursor(CWnd* pWnd, UINT nHitTest, UINT message);
 	afx_msg void OnLButtonDown(UINT Flags, CPoint Loc);
 	afx_msg void OnRButtonDown(UINT Flags, CPoint Loc);
 	afx_msg void OnLButtonUp(UINT Flags, CPoint Loc);
@@ -61,11 +70,7 @@ private:
 	EllipseMode					m_ellipseMode;
 	TriangleMode				m_triangleMode;
 	ArrowMode					m_arrowMode;
-	HandMode					m_handMode;
-
-	std::vector<DiaEntity*>		m_selectedEntities;
-
-	void selectEntity(const CPoint& rpoint);
+	HandMode					m_handMode;		
 };
 
 #ifndef _DEBUG  // debug version in MFCDiaView.cpp

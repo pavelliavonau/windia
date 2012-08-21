@@ -1,16 +1,21 @@
 #pragma once
 #include "abstractmode.h"
+
+class CMFCDiaView;
+
 class RectangleMode :
 	public AbstractMode
 {
 public:
-	RectangleMode(void);
+	RectangleMode(CMFCDiaView*);
 	virtual ~RectangleMode(void);
-	bool isEnoughtItems() const;
-	DiaEntity* createEntity() const;
+
 	bool isPreviewAvailable() const;
 	void drawPreview(CDC* pDC) const;
 	LPCTSTR getCurrentCursor() const;
-	AbstractMode::modes getModeType() const;
+
+protected:
+	bool isEnoughtItems() const;
+	DiaEntity* createEntity() const;	
 };
 

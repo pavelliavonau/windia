@@ -1,10 +1,12 @@
 #include "StdAfx.h"
 #include "EllipseMode.h"
 #include "DiaEllipse.h"
+#include "MFCDiaView.h"
 
 
-EllipseMode::EllipseMode(void)
+EllipseMode::EllipseMode(CMFCDiaView* parent)	
 {
+	mp_parentView = parent;
 }
 
 EllipseMode::~EllipseMode(void)
@@ -39,7 +41,3 @@ LPCTSTR EllipseMode::getCurrentCursor() const
 	return IDC_ARROW;
 }
 
-AbstractMode::modes EllipseMode::getModeType() const
-{
-	return AbstractMode::ELLIPSE_MODE;
-}
