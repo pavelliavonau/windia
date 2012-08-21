@@ -9,8 +9,8 @@ public:
 	DiaConnectionEntity(void);
 	virtual ~DiaConnectionEntity(void);
 
-	void draw(CDC* pDC) = 0;
-	bool contains(const CPoint&) = 0;
+	void draw(CDC* pDC) const = 0;
+	bool contains(const CPoint&) const = 0;
 	void applyVec(std::pair<LONG,LONG>&) = 0;
 
 protected:

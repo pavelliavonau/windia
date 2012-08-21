@@ -27,12 +27,12 @@ DiaRectangle::~DiaRectangle(void)
 {
 }
 
-void DiaRectangle::draw(CDC* pDC)
+void DiaRectangle::draw(CDC* pDC) const
 {
 	pDC->Rectangle(m_x1, m_y1, m_x2, m_y2);
 }
 
-bool DiaRectangle::contains(const CPoint& rpoint)
+bool DiaRectangle::contains(const CPoint& rpoint) const
 {
 	if (rpoint.x >= m_x1 &&
 		rpoint.x <= m_x2 &&
@@ -58,7 +58,7 @@ void DiaRectangle::applyVec(std::pair<LONG,LONG>& vec)
 	m_y2 += dy;
 }
 
-CPoint DiaRectangle::getCentralPoint()
+CPoint DiaRectangle::getCentralPoint() const
 {
 	return CPoint(m_x2 - (m_x2 - m_x1)/2, m_y2 - (m_y2 - m_y1)/2);
 }

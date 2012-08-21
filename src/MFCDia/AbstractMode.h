@@ -6,7 +6,7 @@ class AbstractMode
 {
 public:
 	enum modes{
-		RECTANGLE_MODE, HAND_MODE, ARROW_MODE, ELLIPSE_MODE
+		RECTANGLE_MODE, HAND_MODE, ARROW_MODE, ELLIPSE_MODE, TRIANGLE_MODE
 	};
 
 	AbstractMode(void);

@@ -4,6 +4,11 @@
 
 #pragma once
 #include "AbstractMode.h"
+#include "RectangleMode.h"
+#include "HandMode.h"
+#include "ArrowMode.h"
+#include "EllipseMode.h"
+#include "TriangleMode.h"
 
 class CMFCDiaView : public CView
 {
@@ -52,6 +57,12 @@ protected:
 
 private:
 	AbstractMode*				m_pmode;
+	RectangleMode				m_rectangleMode;
+	EllipseMode					m_ellipseMode;
+	TriangleMode				m_triangleMode;
+	ArrowMode					m_arrowMode;
+	HandMode					m_handMode;
+
 	std::vector<DiaEntity*>		m_selectedEntities;
 
 	void selectEntity(const CPoint& rpoint);

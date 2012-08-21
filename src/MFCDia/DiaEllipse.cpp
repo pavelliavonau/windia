@@ -27,12 +27,12 @@ DiaEllipse::~DiaEllipse(void)
 {
 }
 
-void DiaEllipse::draw(CDC* pDC)
+void DiaEllipse::draw(CDC* pDC) const
 {
 	pDC->Ellipse(m_x1, m_y1, m_x2, m_y2);
 }
 
-bool DiaEllipse::contains(const CPoint& rpoint)
+bool DiaEllipse::contains(const CPoint& rpoint) const
 {
 	if (rpoint.x >= m_x1 &&
 		rpoint.x <= m_x2 &&
@@ -58,7 +58,7 @@ void DiaEllipse::applyVec(std::pair<LONG,LONG>& vec)
 	m_y2 += dy;
 }
 
-CPoint DiaEllipse::getCentralPoint()
+CPoint DiaEllipse::getCentralPoint() const
 {
 	return CPoint(m_x2 - (m_x2 - m_x1)/2, m_y2 - (m_y2 - m_y1)/2);
 }

@@ -44,15 +44,15 @@ void TriangleMode::drawPreview(CDC* pDC) const
 	double R = sqrt(pow(dx, 2)+ pow(dy, 2));
 
 	int xA = xc;
-	int yA = yc - R;	
+	int yA = static_cast<int>(yc - R);	
 
 	dx = R * sqrt(3.0)/2;
 	dy = R/2;
 
-	int xB = xc + dx;
-	int yB = yc + dy;
+	int xB = static_cast<int>(xc + dx);
+	int yB = static_cast<int>(yc + dy);
 
-	int xC = xc - dx;
+	int xC = static_cast<int>(xc - dx);
 	int yC = yB;
 
 	pDC->MoveTo(xA, yA);
@@ -68,5 +68,5 @@ LPCTSTR TriangleMode::getCurrentCursor() const
 
 AbstractMode::modes TriangleMode::getModeType() const
 {
-	return AbstractMode::RECTANGLE_MODE;
+	return AbstractMode::TRIANGLE_MODE;
 }

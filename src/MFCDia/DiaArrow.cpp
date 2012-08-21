@@ -12,7 +12,7 @@ DiaArrow::~DiaArrow(void)
 {
 }
 
-void DiaArrow::draw(CDC* pDC)
+void DiaArrow::draw(CDC* pDC) const
 {
 	CPoint pFrom = m_connectionSequence.front()->getCentralPoint();
 	CPoint pTo = m_connectionSequence.back()->getCentralPoint();
@@ -20,7 +20,7 @@ void DiaArrow::draw(CDC* pDC)
 	pDC->LineTo(pTo.x, pTo.y);	
 }
 
-bool DiaArrow::contains(const CPoint& rpoint)
+bool DiaArrow::contains(const CPoint& rpoint) const
 {
 	/*if (rpoint.x >= m_x1 &&
 		rpoint.x <= m_x2 &&
@@ -47,7 +47,7 @@ void DiaArrow::applyVec(std::pair<LONG,LONG>& vec)
 	m_y2 += dy;*/
 }
 
-CPoint DiaArrow::getCentralPoint()
+CPoint DiaArrow::getCentralPoint() const
 {
 	return CPoint();
 }

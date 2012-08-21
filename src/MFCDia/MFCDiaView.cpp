@@ -13,11 +13,11 @@
 #include "MFCDiaView.h"
 #include <vector>
 #include "DiaEntity.h"
-#include "RectangleMode.h"
-#include "HandMode.h"
-#include "ArrowMode.h"
-#include "EllipseMode.h"
-#include "TriangleMode.h"
+//#include "RectangleMode.h"
+//#include "HandMode.h"
+//#include "ArrowMode.h"
+//#include "EllipseMode.h"
+//#include "TriangleMode.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -45,14 +45,13 @@ END_MESSAGE_MAP()
 
 CMFCDiaView::CMFCDiaView()	
 {
-	m_pmode = new RectangleMode();		//!< init mode
+	m_pmode = &m_rectangleMode;		//!< init mode
 	// TODO: add construction code here
 
 }
 
 CMFCDiaView::~CMFCDiaView()
 {
-	delete m_pmode;
 }
 
 BOOL CMFCDiaView::PreCreateWindow(CREATESTRUCT& cs)
@@ -80,8 +79,8 @@ void CMFCDiaView::OnDraw(CDC* pDC)
 
 	const std::vector<DiaEntity*>* entities = pDoc->getDrawEntities();
 
-	std::vector<DiaEntity*>::const_iterator it = entities->begin();
-	while(it != entities->end())
+	std::vector<DiaEntity*>::const_iterator it = entities->cbegin();
+	while(it != entities->cend())
 	{
 		(*it)->draw(pDC);
 		it++;
@@ -119,48 +118,28 @@ BOOL CMFCDiaView::OnSetCursor(CWnd* pWnd, UINT nHitTest, UINT message)
 }
 
 void CMFCDiaView::OnRectangle()
-{	
-	if (m_pmode != NULL)
-	{
-		delete m_pmode;
-	}	
-	m_pmode = new RectangleMode();
+{		
+	m_pmode = &m_rectangleMode;
 }
 
 void CMFCDiaView::OnEllipse()
-{
-	if (m_pmode != NULL)
-	{
-		delete m_pmode;
-	}	
-	m_pmode = new EllipseMode();
+{	
+	m_pmode = &m_ellipseMode;
 }
 
 void CMFCDiaView::OnTriangle()
-{
-	if (m_pmode != NULL)
-	{
-		delete m_pmode;
-	}	
-	m_pmode = new TriangleMode();
+{	
+	m_pmode = &m_triangleMode;
 }
 
 void CMFCDiaView::OnArrow()
-{
-	if (m_pmode != NULL)
-	{
-		delete m_pmode;
-	}	
-	m_pmode = new ArrowMode();
+{	
+	m_pmode = &m_arrowMode;
 }
 
 void CMFCDiaView::OnHand()
-{
-	if (m_pmode != NULL)
-	{
-		delete m_pmode;
-	}	
-	m_pmode = new HandMode();
+{	
+	m_pmode = &m_handMode;
 }
 
 void CMFCDiaView::OnRButtonDown(UINT Flags, CPoint Loc)
@@ -177,6 +156,7 @@ void CMFCDiaView::OnLButtonDown(UINT Flags, CPoint Loc)
 	{
 	case AbstractMode::RECTANGLE_MODE:
 	case AbstractMode::ELLIPSE_MODE:
+	case AbstractMode::TRIANGLE_MODE:
 		{
 			m_pmode->pushPoint(Loc);
 			if( m_pmode->isEnoughtItems() )

@@ -14,15 +14,15 @@ DiaTriangle::DiaTriangle(LONG xc, LONG yc, LONG xr, LONG yr)
 	double R = sqrt(pow(dx, 2)+ pow(dy, 2));
 
 	m_xA = xc;
-	m_yA = yc - R;	
+	m_yA = static_cast<int>(yc - R);	
 
 	dx = R * sqrt(3.0)/2;
 	dy = R/2;
 
-	m_xB = xc + dx;
-	m_yB = yc + dy;
+	m_xB = static_cast<int>(xc + dx);
+	m_yB = static_cast<int>(yc + dy);
 
-	m_xC = xc - dx;
+	m_xC = static_cast<int>(xc - dx);
 	m_yC = m_yB;
 }
 
@@ -31,7 +31,7 @@ DiaTriangle::~DiaTriangle(void)
 {
 }
 
-void DiaTriangle::draw(CDC* pDC)
+void DiaTriangle::draw(CDC* pDC) const
 {
 	pDC->MoveTo(m_xA, m_yA);
 	pDC->LineTo(m_xB, m_yB);
@@ -39,7 +39,7 @@ void DiaTriangle::draw(CDC* pDC)
 	pDC->LineTo(m_xA, m_yA);	
 }
 
-bool DiaTriangle::contains(const CPoint& rpoint)
+bool DiaTriangle::contains(const CPoint& rpoint) const
 {	   
 	int s1 = wherePoint(m_xA, m_yA, m_xB, m_yB, rpoint.x, rpoint.y);
     int s2 = wherePoint(m_xB, m_yB, m_xC, m_yC, rpoint.x, rpoint.y);
@@ -50,7 +50,7 @@ bool DiaTriangle::contains(const CPoint& rpoint)
 }
 
 
-int DiaTriangle::wherePoint(double ax, double ay, double bx, double by, double px, double py)
+int DiaTriangle::wherePoint(double ax, double ay, double bx, double by, double px, double py) const
 {
 	double s = (bx - ax) * (py - ay) - (by - ay) * (px - ax);
 	if (s>0) 
@@ -79,7 +79,7 @@ void DiaTriangle::applyVec(std::pair<LONG,LONG>& vec)
 	m_yCenter += dy;
 }
 
-CPoint DiaTriangle::getCentralPoint()
+CPoint DiaTriangle::getCentralPoint() const
 {
 	return CPoint(m_xCenter, m_yCenter);
 }

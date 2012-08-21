@@ -8,10 +8,10 @@ class DiaRectangle :
 public:
 	DiaRectangle(int x1, int y1, int x2, int y2);
 	virtual ~DiaRectangle(void);
-	void draw(CDC* pDC);
-	bool contains(const CPoint&);
+	void draw(CDC* pDC) const;
+	bool contains(const CPoint&) const;
 	void applyVec(std::pair<LONG,LONG>&);
-	CPoint getCentralPoint(); 
+	CPoint getCentralPoint() const; 
 
 private:
 	int m_x1;

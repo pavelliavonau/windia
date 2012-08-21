@@ -16,7 +16,7 @@ void DiaEntity::setSelected(bool value)
 	m_selected = value;
 }
 
-bool DiaEntity::isSelected()
+bool DiaEntity::isSelected() const
 {
 	return m_selected;
 }

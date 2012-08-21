@@ -7,14 +7,14 @@ public:
 	DiaTriangle(LONG, LONG, LONG, LONG);
 	virtual ~DiaTriangle(void);
 
-	void draw(CDC* pDC);
-	bool contains(const CPoint&);
+	void draw(CDC* pDC) const;
+	bool contains(const CPoint&) const;
 	void applyVec(std::pair<LONG,LONG>&);
-	CPoint getCentralPoint(); 
+	CPoint getCentralPoint() const; 
 
 private:
 
-	int wherePoint(double ax, double ay, double bx, double by, double px, double py);
+	int wherePoint(double ax, double ay, double bx, double by, double px, double py) const;
 
 	int m_xCenter;
 	int m_yCenter;
