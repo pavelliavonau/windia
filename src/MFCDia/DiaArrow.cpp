@@ -1,5 +1,6 @@
 #include "StdAfx.h"
 #include "DiaArrow.h"
+#include "Arrow.h"
 
 
 DiaArrow::DiaArrow(std::vector<DiaEntity*> link)
@@ -29,8 +30,14 @@ void DiaArrow::draw(CDC* pDC) const
 		return;
 	}
 
-	pDC->MoveTo(pFrom.x, pFrom.y);
-	pDC->LineTo(pTo.x, pTo.y);	
+	pDC->MoveTo(pFrom.x, pFrom.y);	
+
+	ARROWSTRUCT arrow;
+	arrow.bFill = false;
+	arrow.fTheta = 3.14 / 6;
+	arrow.nWidth = 10;
+
+	ArrowTo(pDC->m_hDC, pTo.x, pTo.y, &arrow);
 }
 
 bool DiaArrow::contains(const CPoint& rpoint) const

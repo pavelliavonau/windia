@@ -16,6 +16,7 @@ public:
 private:
 
 	int wherePoint(double ax, double ay, double bx, double by, double px, double py) const;
+	void drawTriamgle(CDC* pDC) const;
 
 	int m_xCenter;
 	int m_yCenter;

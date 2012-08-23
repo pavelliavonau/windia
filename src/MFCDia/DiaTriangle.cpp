@@ -34,24 +34,25 @@ DiaTriangle::~DiaTriangle(void)
 void DiaTriangle::draw(CDC* pDC) const
 {	
 	if (m_selected)
-	{
-		CPen penBlue(PS_SOLID, 5, RGB(0, 0, 255));
-		CPen* pOldPen = pDC->SelectObject(&penBlue);
+	{		
+		CPen* pOldPen = pDC->SelectObject(&m_penBlue);
 
-		pDC->MoveTo(m_xA, m_yA);
-		pDC->LineTo(m_xB, m_yB);
-		pDC->LineTo(m_xC, m_yC);
-		pDC->LineTo(m_xA, m_yA);	
+		drawTriamgle(pDC);
 
 		pDC->SelectObject(pOldPen);
 	}
 	else
 	{
-		pDC->MoveTo(m_xA, m_yA);
-		pDC->LineTo(m_xB, m_yB);
-		pDC->LineTo(m_xC, m_yC);
-		pDC->LineTo(m_xA, m_yA);	
+		drawTriamgle(pDC);
 	}
+}
+
+void DiaTriangle::drawTriamgle(CDC* pDC) const
+{
+	pDC->MoveTo(m_xA, m_yA);
+	pDC->LineTo(m_xB, m_yB);
+	pDC->LineTo(m_xC, m_yC);
+	pDC->LineTo(m_xA, m_yA);	
 }
 
 bool DiaTriangle::contains(const CPoint& rpoint) const

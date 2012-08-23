@@ -2,6 +2,8 @@
 #include "DiaEntity.h"
 
 
+CPen DiaEntity::m_penBlue = CPen(PS_SOLID, 5, RGB(0, 0, 255));
+
 DiaEntity::DiaEntity(void)
 {	
 	m_selected = false;

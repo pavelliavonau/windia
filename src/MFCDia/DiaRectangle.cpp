@@ -30,9 +30,8 @@ DiaRectangle::~DiaRectangle(void)
 void DiaRectangle::draw(CDC* pDC) const
 {
 	if (m_selected)
-	{
-		CPen penBlue(PS_SOLID, 5, RGB(0, 0, 255));
-		CPen* pOldPen = pDC->SelectObject(&penBlue);
+	{		
+		CPen* pOldPen = pDC->SelectObject(&m_penBlue);
 
 		pDC->Rectangle(m_x1, m_y1, m_x2, m_y2);
 

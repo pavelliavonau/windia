@@ -13,7 +13,6 @@
 #include "MFCDiaView.h"
 #include <vector>
 #include "DiaEntity.h"
-#include <iterator>
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -142,8 +141,6 @@ void CMFCDiaView::OnHand()
 {	
 	m_pmode = &m_handMode;
 }
-
-#include <WinUser.h>
 
 void CMFCDiaView::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
 {

@@ -105,6 +105,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AbstractMode.h" />
+    <ClInclude Include="Arrow.h" />
     <ClInclude Include="ArrowMode.h" />
     <ClInclude Include="DiaArrow.h" />
     <ClInclude Include="DiaConnectionEntity.h" />
@@ -126,6 +127,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AbstractMode.cpp" />
+    <ClCompile Include="Arrow.cpp" />
     <ClCompile Include="ArrowMode.cpp" />
     <ClCompile Include="DiaArrow.cpp" />
     <ClCompile Include="DiaConnectionEntity.cpp" />

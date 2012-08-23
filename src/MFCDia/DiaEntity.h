@@ -17,9 +17,11 @@ public:
 	virtual CPoint getCrossPoint(const CPoint&, const CPoint&) const = 0;
 
 protected:
-	bool m_selected;
+	bool		m_selected;
+	static CPen m_penBlue;
 
-	bool lineIntersection(CPoint start1, CPoint end1, CPoint start2, CPoint end2, CPoint *out_intersection) const;	// (C) http://users.livejournal.com/_winnie/152327.html
+	// (C) http://users.livejournal.com/_winnie/152327.html
+	bool lineIntersection(CPoint start1, CPoint end1, CPoint start2, CPoint end2, CPoint *out_intersection) const;	
 
 };
 
