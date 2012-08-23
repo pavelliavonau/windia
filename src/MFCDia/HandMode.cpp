@@ -67,9 +67,7 @@ void HandMode::OnMouseMove(UINT nFlags, CPoint point)
 		std::pair<LONG,LONG> vec;
 		vec.first = point.x - oldPoint.x;
 		vec.second = point.y - oldPoint.y;
-
-		mp_parentView->moveSelected(vec);
-		
+		mp_parentView->moveSelected(vec);		
 		pushPoint(point);
 		mp_parentView->RedrawWindow();		
 	}

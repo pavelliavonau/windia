@@ -28,6 +28,7 @@ public:
 	bool haveSelected() const;
 	void clearSelection();
 	void moveSelected(std::pair<LONG,LONG>);
+	void deleteSelected();
 
 // Overrides
 public:

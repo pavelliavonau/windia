@@ -14,6 +14,7 @@
 #include <propkey.h>
 #include "DiaRectangle.h"
 #include "RectangleMode.h"
+#include <algorithm>
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -209,4 +210,14 @@ void CMFCDiaDoc::moveSelected(std::pair<LONG,LONG> vec)
 	{
 		(*it)->applyVec(vec);
 	}	
+}
+
+void CMFCDiaDoc::deleteSelected()
+{
+	for (std::vector<DiaEntity*>::iterator it = m_selectedEntities.begin(); it != m_selectedEntities.end(); ++it)
+	{				
+		m_entities.erase( std::remove(m_entities.begin(), m_entities.end(), *it), m_entities.end() );				
+		delete *it;					
+	}
+	m_selectedEntities.clear();
 }

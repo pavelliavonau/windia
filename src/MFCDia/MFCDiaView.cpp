@@ -161,7 +161,7 @@ void CMFCDiaView::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	//}
 	if ( nChar == VK_DELETE )
 	{
-		GetDocument()->clearSelection();
+		GetDocument()->deleteSelected();
 		RedrawWindow();
 	}
 }
