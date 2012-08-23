@@ -11,6 +11,7 @@ public:
 	bool contains(const CPoint&) const;
 	void applyVec(std::pair<LONG,LONG>&);
 	CPoint getCentralPoint() const; 
+	CPoint getCrossPoint(const CPoint& from, const CPoint& to) const;
 
 private:
 

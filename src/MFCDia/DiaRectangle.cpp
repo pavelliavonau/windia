@@ -62,3 +62,30 @@ CPoint DiaRectangle::getCentralPoint() const
 {
 	return CPoint(m_x2 - (m_x2 - m_x1)/2, m_y2 - (m_y2 - m_y1)/2);
 }
+
+CPoint DiaRectangle::getCrossPoint(const CPoint& from, const CPoint& to) const
+{	
+	CPoint intersection_point;
+
+	bool found = lineIntersection(from, to, CPoint(m_x1, m_y1), CPoint(m_x1, m_y2), &intersection_point);
+
+	if (found)
+		return intersection_point;
+
+	found = lineIntersection(from, to, CPoint(m_x1, m_y2), CPoint(m_x2, m_y2), &intersection_point);
+
+	if (found)
+		return intersection_point;
+
+	found = lineIntersection(from, to, CPoint(m_x2, m_y2), CPoint(m_x2, m_y1), &intersection_point);
+
+	if (found)
+		return intersection_point;
+
+	found = lineIntersection(from, to, CPoint(m_x2, m_y1), CPoint(m_x1, m_y1), &intersection_point);
+
+	if (found)
+		return intersection_point;
+
+	return CPoint(-1,-1); // stub
+}

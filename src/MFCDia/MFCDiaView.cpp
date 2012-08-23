@@ -13,6 +13,7 @@
 #include "MFCDiaView.h"
 #include <vector>
 #include "DiaEntity.h"
+#include <iterator>
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -70,21 +71,19 @@ void CMFCDiaView::OnDraw(CDC* pDC)
 	
 	ASSERT_VALID(pDoc);
 	if (!pDoc)
-		return;
-	
+		return;	
+
+	const std::vector<DiaEntity*>* entities = pDoc->getDrawEntities();
+
+	for (std::vector<DiaEntity*>::const_iterator it = entities->begin(); it != entities->end(); ++it)
+	{
+		(*it)->draw(pDC);		
+	}		
+
 	if (m_pmode->isPreviewAvailable())
 	{
 		m_pmode->drawPreview(pDC);
 	}
-
-	const std::vector<DiaEntity*>* entities = pDoc->getDrawEntities();
-
-	std::vector<DiaEntity*>::const_iterator it = entities->cbegin();
-	while(it != entities->cend())
-	{
-		(*it)->draw(pDC);
-		it++;
-	}		
 }
 
 

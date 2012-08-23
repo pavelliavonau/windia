@@ -1,5 +1,6 @@
 #pragma once
 #include "diaconnectionentity.h"
+
 class DiaArrow :
 	public DiaConnectionEntity
 {
@@ -10,5 +11,6 @@ public:
 	bool contains(const CPoint&) const;
 	void applyVec(std::pair<LONG,LONG>&);
 	CPoint getCentralPoint() const;
+	CPoint getCrossPoint(const CPoint& from, const CPoint& to) const;
 };
 

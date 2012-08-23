@@ -32,7 +32,7 @@ DiaTriangle::~DiaTriangle(void)
 }
 
 void DiaTriangle::draw(CDC* pDC) const
-{
+{	
 	pDC->MoveTo(m_xA, m_yA);
 	pDC->LineTo(m_xB, m_yB);
 	pDC->LineTo(m_xC, m_yC);
@@ -82,4 +82,26 @@ void DiaTriangle::applyVec(std::pair<LONG,LONG>& vec)
 CPoint DiaTriangle::getCentralPoint() const
 {
 	return CPoint(m_xCenter, m_yCenter);
+}
+
+CPoint DiaTriangle::getCrossPoint(const CPoint& from, const CPoint& to) const
+{
+	CPoint intersection_point;
+
+	bool found = lineIntersection(from, to, CPoint(m_xA, m_yA), CPoint(m_xB, m_yB), &intersection_point);
+
+	if (found)
+		return intersection_point;
+
+	found = lineIntersection(from, to, CPoint(m_xB, m_yB), CPoint(m_xC, m_yC), &intersection_point);
+
+	if (found)
+		return intersection_point;
+
+	found = lineIntersection(from, to, CPoint(m_xC, m_yC), CPoint(m_xA, m_yA), &intersection_point);
+
+	if (found)
+		return intersection_point;	
+
+	return CPoint(-1,-1); // stub
 }

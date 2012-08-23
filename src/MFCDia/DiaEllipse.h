@@ -9,12 +9,17 @@ public:
 	void draw(CDC* pDC) const;
 	bool contains(const CPoint&) const;
 	void applyVec(std::pair<LONG,LONG>&);
-	CPoint getCentralPoint() const; 
+	CPoint getCentralPoint() const;
+	CPoint getCrossPoint(const CPoint& from, const CPoint& to) const;
 
-private:
+private:	
+
 	int m_x1;
 	int m_y1;
 	int m_x2;
 	int m_y2;
+
+	CPoint m_F1;
+	CPoint m_F2;
 };
 

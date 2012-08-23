@@ -31,8 +31,15 @@ bool ArrowMode::isPreviewAvailable() const
 
 void ArrowMode::drawPreview(CDC* pDC) const
 {
-	CPoint firstCenter = m_entities.front()->getCentralPoint();
-	pDC->MoveTo(firstCenter.x, firstCenter.y);
+	DiaEntity* fromEntity = m_entities.front();	
+
+	CPoint fromCenter = fromEntity->getCentralPoint();	
+	CPoint pFrom = fromEntity->getCrossPoint( fromCenter, m_mousePosition );	
+	
+	if (fromEntity->contains(m_mousePosition))
+		return;
+
+	pDC->MoveTo(pFrom.x, pFrom.y);
 	pDC->LineTo(m_mousePosition.x, m_mousePosition.y);	
 }
 
@@ -47,12 +54,7 @@ void ArrowMode::OnLButtonDown(UINT Flags, CPoint Loc)
 	if (pEntity == NULL)
 		return;
 	pushEntity(pEntity);
-	if( isEnoughtItems() )
-	{
-		DiaEntity* e = createEntity();		
-		mp_parentView->addEntity(e);
-		resetMode();		
-	}
+	tryCreateEntity();
 }
 
 void ArrowMode::OnLButtonUp(UINT Flags, CPoint Loc)

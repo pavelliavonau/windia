@@ -47,21 +47,29 @@ BOOL CMFCDiaDoc::OnNewDocument()
 	// TODO: add reinitialization code here
 	// (SDI documents will reuse this document)
 
-	clearDocument();
+	clearDocument();	
 
 	return TRUE;
 }
+
+BOOL CMFCDiaDoc::OnSaveDocument(LPCTSTR lpszPathName)
+{
+	int i = 0;
+	i++;
+	return TRUE;
+}
+
 
 // CMFCDiaDoc serialization
 
 void CMFCDiaDoc::Serialize(CArchive& ar)
 {
 	if (ar.IsStoring())
-	{
+	{		
 		// TODO: add storing code here
 	}
 	else
-	{
+	{				
 		// TODO: add loading code here
 	}
 }
@@ -143,12 +151,10 @@ const std::vector<DiaEntity*>* CMFCDiaDoc::getDrawEntities() const
 }
 
 void CMFCDiaDoc::clearDocument()
-{
-	std::vector<DiaEntity*>::iterator it = m_entities.begin();
-	while(it != m_entities.end())
+{	
+	for (std::vector<DiaEntity*>::iterator it = m_entities.begin(); it != m_entities.end(); ++it)
 	{		
-		delete (*it);
-		it++;
+		delete (*it);		
 	}		
 	m_entities.clear();
 }
@@ -160,13 +166,11 @@ void CMFCDiaDoc::addEntity(DiaEntity* entity)
 }
 
 DiaEntity* CMFCDiaDoc::findEntity(const CPoint& point) const
-{	
-	std::vector<DiaEntity*>::const_iterator it = m_entities.cbegin();
-	while(it != m_entities.cend())
+{		
+	for (std::vector<DiaEntity*>::const_iterator it = m_entities.cbegin(); it != m_entities.cend(); ++it)
 	{		
 		if ((*it)->contains(point))
-			return *it;
-		it++;
+			return *it;	
 	}		
 	return NULL;
 }
@@ -191,22 +195,18 @@ bool CMFCDiaDoc::haveSelected() const
 }
 
 void CMFCDiaDoc::clearSelection()
-{
-	std::vector<DiaEntity*>::iterator it = m_selectedEntities.begin();
-	while(it != m_selectedEntities.end())
+{	
+	for (std::vector<DiaEntity*>::iterator it = m_selectedEntities.begin(); it != m_selectedEntities.end(); ++it)
 	{
-		(*it)->setSelected(false);
-		it++;
+		(*it)->setSelected(false);		
 	}
 	m_selectedEntities.clear();
 }
 
 void CMFCDiaDoc::moveSelected(std::pair<LONG,LONG> vec)
-{
-	std::vector<DiaEntity*>::iterator it = m_selectedEntities.begin();
-	while(it != m_selectedEntities.end())
+{	
+	for (std::vector<DiaEntity*>::iterator it = m_selectedEntities.begin(); it != m_selectedEntities.end(); ++it)
 	{
 		(*it)->applyVec(vec);
-		it++;
 	}	
 }
