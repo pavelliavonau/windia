@@ -103,7 +103,7 @@ CPoint DiaTriangle::getCrossPoint(const CPoint& from, const CPoint& to) const
 {
 	CPoint intersection_point;
 
-	bool found = lineIntersection(from, to, CPoint(m_xA, m_yA), CPoint(m_xB, m_yB), &intersection_point);
+	bool found = lineIntersection(from, to, CPoint(m_xA , m_yA), CPoint(m_xB , m_yB), &intersection_point);
 
 	if (found)
 		return intersection_point;
@@ -113,10 +113,10 @@ CPoint DiaTriangle::getCrossPoint(const CPoint& from, const CPoint& to) const
 	if (found)
 		return intersection_point;
 
-	found = lineIntersection(from, to, CPoint(m_xC, m_yC), CPoint(m_xA, m_yA), &intersection_point);
+	found = lineIntersection(from, to, CPoint(m_xC , m_yC), CPoint(m_xA , m_yA), &intersection_point);
 
 	if (found)
 		return intersection_point;	
 
-	return CPoint(-1,-1); // stub
+	return CPoint(m_xA , m_yA); // stub
 }

@@ -97,5 +97,5 @@ CPoint DiaRectangle::getCrossPoint(const CPoint& from, const CPoint& to) const
 	if (found)
 		return intersection_point;
 
-	return CPoint(-1,-1); // stub
+	return to; // stub
 }
