@@ -29,7 +29,17 @@ DiaRectangle::~DiaRectangle(void)
 
 void DiaRectangle::draw(CDC* pDC) const
 {
-	pDC->Rectangle(m_x1, m_y1, m_x2, m_y2);
+	if (m_selected)
+	{
+		CPen penBlue(PS_SOLID, 5, RGB(0, 0, 255));
+		CPen* pOldPen = pDC->SelectObject(&penBlue);
+
+		pDC->Rectangle(m_x1, m_y1, m_x2, m_y2);
+
+		pDC->SelectObject(pOldPen);
+	}
+	else
+		pDC->Rectangle(m_x1, m_y1, m_x2, m_y2);
 }
 
 bool DiaRectangle::contains(const CPoint& rpoint) const

@@ -6,6 +6,7 @@
 HandMode::HandMode(CMFCDiaView* parent)
 {
 	mp_parentView = parent;
+	m_isTracking = false;
 }
 
 
@@ -39,24 +40,28 @@ LPCTSTR HandMode::getCurrentCursor() const
 
 void HandMode::OnLButtonDown(UINT Flags, CPoint Loc)
 {
+	if ( mp_parentView->haveSelected() )
+	{		
+		mp_parentView->clearSelection();
+		pullPoint();
+	}
+
 	if(mp_parentView->selectEntity(Loc))	
 	{
 		pushPoint(Loc);
-	}
+		mp_parentView->RedrawWindow();
+		m_isTracking = true;
+	}	
 }
 
 void HandMode::OnLButtonUp(UINT Flags, CPoint Loc)
 {
-	if ( mp_parentView->haveSelected() )
-	{		
-		mp_parentView->clearSelection();
-		pullPoint();		
-	}
+	m_isTracking = false;
 }
 
 void HandMode::OnMouseMove(UINT nFlags, CPoint point)
 {
-	if ( mp_parentView->haveSelected() )
+	if ( m_isTracking )
 	{		
 		CPoint oldPoint = pullPoint();
 		std::pair<LONG,LONG> vec;

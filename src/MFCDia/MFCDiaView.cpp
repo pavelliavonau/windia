@@ -30,6 +30,8 @@ BEGIN_MESSAGE_MAP(CMFCDiaView, CView)
 	ON_WM_LBUTTONUP()
 	ON_WM_MOUSEMOVE()
 	ON_WM_SETCURSOR()
+	ON_WM_KEYDOWN()
+	ON_WM_KEYUP()
 	ON_COMMAND(ID_BUTTON_RECTANGLE, OnRectangle)
 	ON_COMMAND(ID_BUTTON_HAND, OnHand)
 	ON_COMMAND(ID_BUTTON_ARROW, OnArrow)
@@ -139,6 +141,29 @@ void CMFCDiaView::OnArrow()
 void CMFCDiaView::OnHand()
 {	
 	m_pmode = &m_handMode;
+}
+
+#include <WinUser.h>
+
+void CMFCDiaView::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
+{
+
+
+}
+
+void CMFCDiaView::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
+{
+	//if ( nChar == VK_LCONTROL ||				// TODO: idea of multiple selection
+	//	 nChar == VK_RCONTROL)
+	//{
+	//	int i= 0;
+	//	i++;		
+	//}
+	if ( nChar == VK_DELETE )
+	{
+		GetDocument()->clearSelection();
+		RedrawWindow();
+	}
 }
 
 void CMFCDiaView::OnRButtonDown(UINT Flags, CPoint Loc)

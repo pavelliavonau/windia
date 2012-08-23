@@ -82,7 +82,7 @@ void AbstractMode::tryCreateEntity()
 	if( isEnoughtItems() )
 	{
 		DiaEntity* e = createEntity();		
-		mp_parentView->addEntity(e);
+		mp_parentView->addEntity(e);		
 		resetMode();		
 	}	
 }

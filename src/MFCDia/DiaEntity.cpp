@@ -3,7 +3,8 @@
 
 
 DiaEntity::DiaEntity(void)
-{
+{	
+	m_selected = false;
 }
 
 

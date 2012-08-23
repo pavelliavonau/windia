@@ -47,6 +47,8 @@ public:
 	afx_msg void OnTriangle();
 	afx_msg void OnArrow();
 	afx_msg void OnHand();	
+	afx_msg void OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags);
+	afx_msg void OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags);
 	BOOL OnSetCursor(CWnd* pWnd, UINT nHitTest, UINT message);
 	afx_msg void OnLButtonDown(UINT Flags, CPoint Loc);
 	afx_msg void OnRButtonDown(UINT Flags, CPoint Loc);

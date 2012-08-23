@@ -21,5 +21,8 @@ public:
 protected:
 	bool isEnoughtItems() const;
 	DiaEntity* createEntity() const;	
+
+private:
+	bool m_isTracking;
 };
 
