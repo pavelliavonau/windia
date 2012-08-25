@@ -5,6 +5,11 @@
 class DiaEntity
 {
 public:
+
+	enum Type {
+		Ellipse, Rectangle, Triangle, Arrow
+	};
+
 	DiaEntity(void);
 	virtual ~DiaEntity(void);
 
@@ -15,6 +20,12 @@ public:
 	virtual void applyVec(std::pair<LONG,LONG>&) = 0;
 	virtual CPoint getCentralPoint() const = 0;
 	virtual CPoint getCrossPoint(const CPoint&, const CPoint&) const = 0;
+	virtual DiaEntity::Type type() const = 0;
+
+	long id() const
+    {
+        return reinterpret_cast<long>(this);
+    }
 
 protected:
 	bool		m_selected;

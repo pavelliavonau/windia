@@ -6,12 +6,12 @@
 DiaTriangle::DiaTriangle(LONG xc, LONG yc, LONG xr, LONG yr)
 {
 	m_xCenter = xc;
-	m_yCenter = yc;	
+	m_yCenter = yc;		
 
 	double dx = xr - xc;
 	double dy = yr - yc;
 
-	double R = sqrt(pow(dx, 2)+ pow(dy, 2));
+	double R = sqrt(pow(dx, 2)+ pow(dy, 2));	
 
 	m_xA = xc;
 	m_yA = static_cast<int>(yc - R);	
@@ -24,6 +24,19 @@ DiaTriangle::DiaTriangle(LONG xc, LONG yc, LONG xr, LONG yr)
 
 	m_xC = static_cast<int>(xc - dx);
 	m_yC = m_yB;
+}
+
+DiaTriangle::DiaTriangle(LONG xA, LONG yA, LONG xB, LONG yB, LONG xC, LONG yC) :
+	m_xA(xA),
+	m_yA(yA),
+	m_xB(xB),
+	m_yB(yB),
+	m_xC(xC),
+	m_yC(yC)
+{
+	
+	m_xCenter = (xC - xB) / 2;
+	m_yCenter = (yC - yA) / 2;
 }
 
 

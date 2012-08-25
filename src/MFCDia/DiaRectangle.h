@@ -13,6 +13,12 @@ public:
 	void applyVec(std::pair<LONG,LONG>&);
 	CPoint getCentralPoint() const; 
 	CPoint getCrossPoint(const CPoint& from, const CPoint& to) const;
+	virtual DiaEntity::Type type() const { return DiaEntity::Rectangle; };
+
+	const int& getX1r() const { return m_x1; }
+	const int& getY1r() const { return m_y1; }
+	const int& getX2r() const { return m_x2; }
+	const int& getY2r() const { return m_y2; }
 
 private:	
 

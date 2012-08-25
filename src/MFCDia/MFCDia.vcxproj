@@ -107,7 +107,10 @@
     <ClInclude Include="AbstractMode.h" />
     <ClInclude Include="Arrow.h" />
     <ClInclude Include="ArrowMode.h" />
+    <ClInclude Include="BinaryTypes.h" />
     <ClInclude Include="DiaArrow.h" />
+    <ClInclude Include="DiaBinaryLoader.h" />
+    <ClInclude Include="DiaBinarySaver.h" />
     <ClInclude Include="DiaConnectionEntity.h" />
     <ClInclude Include="DiaEllipse.h" />
     <ClInclude Include="DiaEntity.h" />
@@ -115,6 +118,8 @@
     <ClInclude Include="DiaTriangle.h" />
     <ClInclude Include="EllipseMode.h" />
     <ClInclude Include="HandMode.h" />
+    <ClInclude Include="IDiaLoader.h" />
+    <ClInclude Include="IDiaSaver.h" />
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="MFCDia.h" />
     <ClInclude Include="MFCDiaDoc.h" />
@@ -130,6 +135,8 @@
     <ClCompile Include="Arrow.cpp" />
     <ClCompile Include="ArrowMode.cpp" />
     <ClCompile Include="DiaArrow.cpp" />
+    <ClCompile Include="DiaBinaryLoader.cpp" />
+    <ClCompile Include="DiaBinarySaver.cpp" />
     <ClCompile Include="DiaConnectionEntity.cpp" />
     <ClCompile Include="DiaEllipse.cpp" />
     <ClCompile Include="DiaEntity.cpp" />
@@ -137,6 +144,8 @@
     <ClCompile Include="DiaTriangle.cpp" />
     <ClCompile Include="EllipseMode.cpp" />
     <ClCompile Include="HandMode.cpp" />
+    <ClCompile Include="IDiaLoader.cpp" />
+    <ClCompile Include="IDiaSaver.cpp" />
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="MFCDia.cpp" />
     <ClCompile Include="MFCDiaDoc.cpp" />

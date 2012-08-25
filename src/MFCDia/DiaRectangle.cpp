@@ -31,7 +31,7 @@ void DiaRectangle::draw(CDC* pDC) const
 {
 	if (m_selected)
 	{		
-		CPen* pOldPen = pDC->SelectObject(&m_penBlue);
+		CPen* pOldPen = pDC->SelectObject(&m_penBlue);		//crashes
 
 		pDC->Rectangle(m_x1, m_y1, m_x2, m_y2);
 

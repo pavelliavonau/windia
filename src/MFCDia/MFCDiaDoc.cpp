@@ -30,9 +30,10 @@ END_MESSAGE_MAP()
 
 // CMFCDiaDoc construction/destruction
 
-CMFCDiaDoc::CMFCDiaDoc() 
+CMFCDiaDoc::CMFCDiaDoc()	
 {
-	// TODO: add one-time construction code here	
+	m_saver = &m_binarySaver;
+	m_loader = &m_binaryLoader;
 }
 
 CMFCDiaDoc::~CMFCDiaDoc()
@@ -55,11 +56,15 @@ BOOL CMFCDiaDoc::OnNewDocument()
 
 BOOL CMFCDiaDoc::OnSaveDocument(LPCTSTR lpszPathName)
 {
-	int i = 0;
-	i++;
-	return TRUE;
+	return m_saver->saveEnities(lpszPathName, m_entities);	
 }
 
+
+BOOL CMFCDiaDoc::OnOpenDocument(LPCTSTR lpszPathName)
+{
+	clearDocument();
+	return m_loader->loadEnities(lpszPathName, &m_entities);
+}
 
 // CMFCDiaDoc serialization
 

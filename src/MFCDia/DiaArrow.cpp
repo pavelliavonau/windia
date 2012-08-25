@@ -58,3 +58,12 @@ CPoint DiaArrow::getCrossPoint(const CPoint& from, const CPoint& to) const
 {
 	return getCentralPoint();
 }
+
+const DiaEntity* DiaArrow::getBeginEntity() const
+{
+	return m_connectionSequence.front();
+}
+const DiaEntity* DiaArrow::getEndEntity() const
+{
+	return m_connectionSequence.back();
+}

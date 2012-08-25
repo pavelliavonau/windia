@@ -6,6 +6,8 @@
 #pragma once
 #include <vector>
 #include "AbstractMode.h"
+#include "DiaBinarySaver.h"
+#include "DiaBinaryLoader.h"
 
 class DiaEntity;
 
@@ -34,6 +36,7 @@ public:
 public:
 	virtual BOOL OnNewDocument();
 	virtual BOOL OnSaveDocument(LPCTSTR lpszPathName);
+	virtual BOOL OnOpenDocument(LPCTSTR lpszPathName);
 	virtual void Serialize(CArchive& ar);
 #ifdef SHARED_HANDLERS
 	virtual void InitializeSearchContent();
@@ -62,4 +65,8 @@ protected:
 private:
 	std::vector<DiaEntity*>		m_entities;	
 	std::vector<DiaEntity*>		m_selectedEntities;
+	IDiaSaver*					m_saver;
+	DiaBinarySaver				m_binarySaver;
+	IDiaLoader*					m_loader;
+	DiaBinaryLoader				m_binaryLoader;
 };
