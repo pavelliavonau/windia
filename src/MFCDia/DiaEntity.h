@@ -1,6 +1,7 @@
 #pragma once
 #include <afxwin.h>
 #include <utility>
+#include <stdint.h>
 
 class DiaEntity
 {
@@ -22,9 +23,9 @@ public:
 	virtual CPoint getCrossPoint(const CPoint&, const CPoint&) const = 0;
 	virtual DiaEntity::Type type() const = 0;
 
-	long id() const
+	uint32_t id() const
     {
-        return reinterpret_cast<long>(this);
+        return reinterpret_cast<uint32_t>(this);
     }
 
 protected:

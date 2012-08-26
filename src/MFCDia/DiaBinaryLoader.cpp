@@ -17,6 +17,7 @@ DiaBinaryLoader::~DiaBinaryLoader(void)
 
 bool DiaBinaryLoader::loadEnities(LPCTSTR lpszPathName, std::vector<DiaEntity*>* entities) 
 {
+	m_loaded.clear();
 	std::fstream file(lpszPathName, std::ios_base::in|std::ios_base::binary);
 
 	while(true)

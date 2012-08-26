@@ -34,7 +34,7 @@ void DiaArrow::draw(CDC* pDC) const
 
 	ARROWSTRUCT arrow;
 	arrow.bFill = false;
-	arrow.fTheta = 3.14 / 6;
+	arrow.fTheta = 3.14f / 6;
 	arrow.nWidth = 10;
 
 	ArrowTo(pDC->m_hDC, pTo.x, pTo.y, &arrow);
