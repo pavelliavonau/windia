@@ -8,7 +8,7 @@ public:
 	DiaBinarySaver();
 	virtual ~DiaBinarySaver(void);
 
-	bool saveEnities(LPCTSTR lpszPathName, const std::vector<DiaEntity*>& entities) const;
+	bool saveEnities(LPCTSTR lpszPathName, const std::list<DiaEntity*>& entities) const;
 
 private:
 

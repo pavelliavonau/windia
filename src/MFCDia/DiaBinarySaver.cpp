@@ -19,11 +19,11 @@ DiaBinarySaver::~DiaBinarySaver(void)
 {
 }
 
-bool DiaBinarySaver::saveEnities(LPCTSTR lpszPathName, const std::vector<DiaEntity*>& entities) const
+bool DiaBinarySaver::saveEnities(LPCTSTR lpszPathName, const std::list<DiaEntity*>& entities) const
 {
 	std::fstream file(lpszPathName, std::ios_base::out|std::ios_base::binary);
 
-	for (std::vector<DiaEntity*>::const_iterator it = entities.cbegin() ; it != entities.cend(); it++)
+	for (std::list<DiaEntity*>::const_iterator it = entities.cbegin() ; it != entities.cend(); it++)
 	{
 		const DiaEntity* e = *it;	
 		DiaEntity::Type type = e->type();

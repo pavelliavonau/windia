@@ -15,6 +15,7 @@
 #include "DiaRectangle.h"
 #include "RectangleMode.h"
 #include <algorithm>
+#include "DiaArrow.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -63,6 +64,7 @@ BOOL CMFCDiaDoc::OnSaveDocument(LPCTSTR lpszPathName)
 BOOL CMFCDiaDoc::OnOpenDocument(LPCTSTR lpszPathName)
 {
 	clearDocument();
+	m_selectedEntities.clear();
 	return m_loader->loadEnities(lpszPathName, &m_entities);
 }
 
@@ -151,14 +153,14 @@ void CMFCDiaDoc::Dump(CDumpContext& dc) const
 
 // CMFCDiaDoc commands
 
-const std::vector<DiaEntity*>* CMFCDiaDoc::getDrawEntities() const
+const std::list<DiaEntity*>* CMFCDiaDoc::getDrawEntities() const
 {
 	return &m_entities;
 }
 
 void CMFCDiaDoc::clearDocument()
 {	
-	for (std::vector<DiaEntity*>::iterator it = m_entities.begin(); it != m_entities.end(); ++it)
+	for (std::list<DiaEntity*>::iterator it = m_entities.begin(); it != m_entities.end(); ++it)
 	{		
 		delete (*it);		
 	}		
@@ -167,18 +169,73 @@ void CMFCDiaDoc::clearDocument()
 
 void CMFCDiaDoc::addEntity(DiaEntity* entity)
 {
-	m_entities.push_back(entity);
+	DiaEntity::Type type = entity->type();
+	if (type == DiaEntity::Arrow)
+	{
+		DiaArrow* pArrow = dynamic_cast<DiaArrow*>(entity);
+		const DiaEntity* begin = pArrow->getBeginEntity();
+		const DiaEntity* end = pArrow->getEndEntity();
+		
+		if ( !areAlreadyConnected(begin, end) )
+		{
+			m_entities.push_back(entity);		
+		}
+		else
+		{
+			delete entity;
+		}
+	}
+	else
+	{
+		m_entities.push_front(entity);
+	}
 	UpdateAllViews(NULL);
+}
+
+bool CMFCDiaDoc::areAlreadyConnected(const DiaEntity* begin, const DiaEntity* end) const
+{
+	for (std::list<DiaEntity*>::const_reverse_iterator it = m_entities.crbegin(); it != m_entities.crend(); ++it)
+	{		
+		if ((*it)->type() != DiaEntity::Arrow)
+			break;
+		DiaArrow* pArrow = dynamic_cast<DiaArrow*>(*it);
+		if (pArrow->getBeginEntity()->id() == begin->id() &&
+			pArrow->getEndEntity()->id() == end->id() || 
+			pArrow->getBeginEntity()->id() == end->id() &&
+			pArrow->getEndEntity()->id() == begin->id())
+		{
+			return true;
+		}		
+	}	
+	return false;
 }
 
 DiaEntity* CMFCDiaDoc::findEntity(const CPoint& point) const
 {		
-	for (std::vector<DiaEntity*>::const_iterator it = m_entities.cbegin(); it != m_entities.cend(); ++it)
+	for (std::list<DiaEntity*>::const_iterator it = m_entities.cbegin(); it != m_entities.cend(); ++it)
 	{		
 		if ((*it)->contains(point))
 			return *it;	
 	}		
 	return NULL;
+}
+
+bool CMFCDiaDoc::findConnected(const DiaEntity* entity, std::list<DiaEntity*>* pList) const
+{
+	int needed_id = entity->id();
+
+	for (std::list<DiaEntity*>::const_reverse_iterator it = m_entities.crbegin(); it != m_entities.crend(); ++it)
+	{		
+		if ((*it)->type() != DiaEntity::Arrow)
+			break;
+		DiaArrow* pArrow = dynamic_cast<DiaArrow*>(*it);
+		if (pArrow->getBeginEntity()->id() == needed_id ||
+			pArrow->getEndEntity()->id() == needed_id)
+		{
+			pList->push_back(*it);
+		}		
+	}	
+	return true;
 }
 
 bool CMFCDiaDoc::selectEntity(const CPoint& rpoint)
@@ -191,6 +248,17 @@ bool CMFCDiaDoc::selectEntity(const CPoint& rpoint)
 	}
 
 	pEntity->setSelected(true);
+
+	std::list<DiaEntity*> connections;
+
+	findConnected(pEntity, &connections);
+
+	for (std::list<DiaEntity*>::iterator it = connections.begin(); it != connections.end(); ++it)
+	{
+		(*it)->setSelected(true);
+		m_selectedEntities.push_back(*it);
+	}
+
 	m_selectedEntities.push_back(pEntity);		
 	return true;
 }
@@ -202,7 +270,7 @@ bool CMFCDiaDoc::haveSelected() const
 
 void CMFCDiaDoc::clearSelection()
 {	
-	for (std::vector<DiaEntity*>::iterator it = m_selectedEntities.begin(); it != m_selectedEntities.end(); ++it)
+	for (std::list<DiaEntity*>::iterator it = m_selectedEntities.begin(); it != m_selectedEntities.end(); ++it)
 	{
 		(*it)->setSelected(false);		
 	}
@@ -211,7 +279,7 @@ void CMFCDiaDoc::clearSelection()
 
 void CMFCDiaDoc::moveSelected(std::pair<LONG,LONG> vec)
 {	
-	for (std::vector<DiaEntity*>::iterator it = m_selectedEntities.begin(); it != m_selectedEntities.end(); ++it)
+	for (std::list<DiaEntity*>::iterator it = m_selectedEntities.begin(); it != m_selectedEntities.end(); ++it)
 	{
 		(*it)->applyVec(vec);
 	}	
@@ -219,7 +287,7 @@ void CMFCDiaDoc::moveSelected(std::pair<LONG,LONG> vec)
 
 void CMFCDiaDoc::deleteSelected()
 {
-	for (std::vector<DiaEntity*>::iterator it = m_selectedEntities.begin(); it != m_selectedEntities.end(); ++it)
+	for (std::list<DiaEntity*>::iterator it = m_selectedEntities.begin(); it != m_selectedEntities.end(); ++it)
 	{				
 		m_entities.erase( std::remove(m_entities.begin(), m_entities.end(), *it), m_entities.end() );				
 		delete *it;					

@@ -15,7 +15,7 @@ DiaBinaryLoader::~DiaBinaryLoader(void)
 {
 }
 
-bool DiaBinaryLoader::loadEnities(LPCTSTR lpszPathName, std::vector<DiaEntity*>* entities) 
+bool DiaBinaryLoader::loadEnities(LPCTSTR lpszPathName, std::list<DiaEntity*>* entities) 
 {
 	m_loaded.clear();
 	std::fstream file(lpszPathName, std::ios_base::in|std::ios_base::binary);
@@ -41,7 +41,7 @@ bool DiaBinaryLoader::loadEnities(LPCTSTR lpszPathName, std::vector<DiaEntity*>*
 	return true;
 }
 
-bool DiaBinaryLoader::loadRectangle(std::fstream& fstream, std::vector<DiaEntity*>* entities)
+bool DiaBinaryLoader::loadRectangle(std::fstream& fstream, std::list<DiaEntity*>* entities)
 {
 	long id;
 	int x1,y1,x2,y2;
@@ -69,7 +69,7 @@ bool DiaBinaryLoader::loadRectangle(std::fstream& fstream, std::vector<DiaEntity
 	return true;
 }
 
-bool DiaBinaryLoader::loadTriangle(std::fstream& fstream, std::vector<DiaEntity*>* entities)
+bool DiaBinaryLoader::loadTriangle(std::fstream& fstream, std::list<DiaEntity*>* entities)
 {
 	long id;
 	int xA,yA,xB,yB,xC,yC;
@@ -103,7 +103,7 @@ bool DiaBinaryLoader::loadTriangle(std::fstream& fstream, std::vector<DiaEntity*
 	return true;
 }
 
-bool DiaBinaryLoader::loadEllipse(std::fstream& fstream, std::vector<DiaEntity*>* entities)
+bool DiaBinaryLoader::loadEllipse(std::fstream& fstream, std::list<DiaEntity*>* entities)
 {
 	long id;
 	int x1,y1,x2,y2;
@@ -130,7 +130,7 @@ bool DiaBinaryLoader::loadEllipse(std::fstream& fstream, std::vector<DiaEntity*>
 	return true;
 }
 
-bool DiaBinaryLoader::loadArrow(std::fstream& fstream, std::vector<DiaEntity*>* entities)
+bool DiaBinaryLoader::loadArrow(std::fstream& fstream, std::list<DiaEntity*>* entities)
 {
 	long id;
 	int begin_id, end_id;
@@ -144,7 +144,7 @@ bool DiaBinaryLoader::loadArrow(std::fstream& fstream, std::vector<DiaEntity*>* 
 	fstream.read(block.f_char, sizeof(block));
 	end_id = block.f_int;	
 		
-	std::vector<DiaEntity*> link;	
+	std::list<DiaEntity*> link;	
 	
 	DiaEntity* e;
 

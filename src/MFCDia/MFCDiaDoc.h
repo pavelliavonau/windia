@@ -4,7 +4,7 @@
 
 
 #pragma once
-#include <vector>
+#include <list>
 #include "AbstractMode.h"
 #include "DiaBinarySaver.h"
 #include "DiaBinaryLoader.h"
@@ -22,15 +22,17 @@ public:
 
 // Operations
 public:
-	const std::vector<DiaEntity*>* getDrawEntities() const;	
+	const std::list<DiaEntity*>* getDrawEntities() const;	
 	void addEntity(DiaEntity*);
 	DiaEntity* findEntity(const CPoint& point) const;
+	bool findConnected(const DiaEntity* entity, std::list<DiaEntity*>* ) const;
 	bool selectEntity(const CPoint& );
 	void clearDocument();	
 	bool haveSelected() const;
 	void clearSelection();
 	void moveSelected(std::pair<LONG,LONG>);
 	void deleteSelected();
+	bool areAlreadyConnected(const DiaEntity*, const DiaEntity*) const;
 
 // Overrides
 public:
@@ -63,8 +65,8 @@ protected:
 #endif // SHARED_HANDLERS
 
 private:
-	std::vector<DiaEntity*>		m_entities;	
-	std::vector<DiaEntity*>		m_selectedEntities;
+	std::list<DiaEntity*>		m_entities;	
+	std::list<DiaEntity*>		m_selectedEntities;
 	IDiaSaver*					m_saver;
 	DiaBinarySaver				m_binarySaver;
 	IDiaLoader*					m_loader;

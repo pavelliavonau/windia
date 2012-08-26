@@ -22,5 +22,6 @@ protected:
 
 	bool isEnoughtItems() const;
 	DiaEntity* createEntity() const;	
+	virtual void tryCreateEntity();
 };
 

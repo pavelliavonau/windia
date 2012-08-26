@@ -1,6 +1,6 @@
 #pragma once
 #include "diaentity.h"
-#include <vector>
+#include <list>
 
 class DiaConnectionEntity :
 	public DiaEntity
@@ -14,6 +14,6 @@ public:
 	void applyVec(std::pair<LONG,LONG>&) = 0;
 
 protected:
-	std::vector<DiaEntity*> m_connectionSequence;
+	std::list<DiaEntity*> m_connectionSequence;
 };
 

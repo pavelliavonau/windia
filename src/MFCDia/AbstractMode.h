@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <list>
 #include "DiaEntity.h"
 
 class CMFCDiaView;
@@ -31,10 +32,10 @@ protected:
 	virtual DiaEntity* createEntity() const = 0;
 	virtual void resetMode();	
 	virtual void setMousePos(CPoint);	
-	void tryCreateEntity();
+	virtual void tryCreateEntity();
 
 	std::vector<CPoint>		m_points;
-	std::vector<DiaEntity*> m_entities;
+	std::list<DiaEntity*>	m_entities;
 	CPoint					m_mousePosition;
 	CMFCDiaView*			mp_parentView;	
 };

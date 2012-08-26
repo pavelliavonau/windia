@@ -70,3 +70,14 @@ void ArrowMode::OnMouseMove(UINT nFlags, CPoint point)
 		mp_parentView->RedrawWindow();
 	}
 }
+
+void ArrowMode::tryCreateEntity()
+{
+	if( isEnoughtItems() )
+	{		
+
+		DiaEntity* e = createEntity();		
+		mp_parentView->addEntity(e);		
+		resetMode();		
+	}	
+}

@@ -11,7 +11,7 @@
 
 #include "MFCDiaDoc.h"
 #include "MFCDiaView.h"
-#include <vector>
+#include <list>
 #include "DiaEntity.h"
 
 #ifdef _DEBUG
@@ -74,9 +74,9 @@ void CMFCDiaView::OnDraw(CDC* pDC)
 	if (!pDoc)
 		return;	
 
-	const std::vector<DiaEntity*>* entities = pDoc->getDrawEntities();
+	const std::list<DiaEntity*>* entities = pDoc->getDrawEntities();
 
-	for (std::vector<DiaEntity*>::const_iterator it = entities->begin(); it != entities->end(); ++it)
+	for (std::list<DiaEntity*>::const_reverse_iterator it = entities->rbegin(); it != entities->rend(); ++it)
 	{
 		(*it)->draw(pDC);		
 	}		
@@ -170,6 +170,8 @@ void CMFCDiaView::OnRButtonDown(UINT Flags, CPoint Loc)
 
 void CMFCDiaView::OnLButtonDown(UINT Flags, CPoint Loc)
 {
+	GetDocument()->clearSelection();
+	RedrawWindow();
 	m_pmode->OnLButtonDown(Flags, Loc);	
 }
 

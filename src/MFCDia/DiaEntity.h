@@ -23,7 +23,7 @@ public:
 	virtual CPoint getCrossPoint(const CPoint&, const CPoint&) const = 0;
 	virtual DiaEntity::Type type() const = 0;
 
-	uint32_t id() const
+	uint32_t id() const			// TODO: only 32 bit architecture
     {
         return reinterpret_cast<uint32_t>(this);
     }

@@ -62,10 +62,17 @@ void DiaTriangle::draw(CDC* pDC) const
 
 void DiaTriangle::drawTriamgle(CDC* pDC) const
 {
-	pDC->MoveTo(m_xA, m_yA);
-	pDC->LineTo(m_xB, m_yB);
-	pDC->LineTo(m_xC, m_yC);
-	pDC->LineTo(m_xA, m_yA);	
+	CPoint pts[3];
+	pts[0].x = m_xA;
+	pts[0].y = m_yA;
+
+	pts[1].x = m_xB;
+	pts[1].y = m_yB;
+
+	pts[2].x = m_xC;
+	pts[2].y = m_yC;
+	
+	pDC->Polygon(pts, 3);
 }
 
 bool DiaTriangle::contains(const CPoint& rpoint) const
