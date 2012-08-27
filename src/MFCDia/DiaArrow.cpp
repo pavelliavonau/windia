@@ -60,7 +60,7 @@ bool DiaArrow::contains(const CPoint& rpoint) const
 	return false;
 }
 
-void DiaArrow::applyVec(std::pair<LONG,LONG>& vec)
+void DiaArrow::applyVec(const std::pair<LONG,LONG>& vec)
 {
 }
 

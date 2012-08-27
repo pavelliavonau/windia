@@ -30,7 +30,7 @@ public:
 	bool selectEntity(const CPoint& rpoint);
 	bool haveSelected() const;
 	void clearSelection();
-	void moveSelected(std::pair<LONG,LONG>);
+	void moveSelected(const std::pair<LONG,LONG>&);
 
 // Overrides
 public:

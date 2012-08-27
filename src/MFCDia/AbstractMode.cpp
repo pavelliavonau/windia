@@ -16,9 +16,9 @@ void AbstractMode::pushPoint(CPoint new_point)
 	m_points.push_back(new_point);
 }
 
-CPoint AbstractMode::pullPoint()
+CPoint& AbstractMode::pullPoint()
 {
-	CPoint point = m_points.back();
+	CPoint& point = m_points.back();
 	m_points.pop_back();
 	return point;
 }
@@ -68,7 +68,7 @@ void AbstractMode::OnLButtonUp(UINT Flags, CPoint Loc)
 
 }
 
-void AbstractMode::OnMouseMove(UINT nFlags, CPoint point)
+void AbstractMode::OnMouseMove(UINT nFlags, const CPoint& point)
 {
 	if ( isPreviewAvailable() )
 	{

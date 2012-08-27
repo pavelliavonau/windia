@@ -24,7 +24,7 @@ bool DiaEntity::isSelected() const
 	return m_selected;
 }
 
-bool DiaEntity::lineIntersection(CPoint start1, CPoint end1, CPoint start2, CPoint end2, CPoint *out_intersection) const
+bool DiaEntity::lineIntersection(const CPoint& start1, const CPoint& end1, const CPoint& start2, const CPoint& end2, CPoint *out_intersection) const
 {
     CPoint dir1 = end1 - start1;
     CPoint dir2 = end2 - start2;

@@ -210,7 +210,7 @@ void CMFCDiaView::clearSelection()
 	GetDocument()->clearSelection();
 }
 
-void CMFCDiaView::moveSelected(std::pair<LONG,LONG> vec)
+void CMFCDiaView::moveSelected(const std::pair<LONG,LONG>& vec)
 {
 	GetDocument()->moveSelected(vec);
 }

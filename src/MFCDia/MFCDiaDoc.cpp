@@ -277,7 +277,7 @@ void CMFCDiaDoc::clearSelection()
 	m_selectedEntities.clear();
 }
 
-void CMFCDiaDoc::moveSelected(std::pair<LONG,LONG> vec)
+void CMFCDiaDoc::moveSelected(const std::pair<LONG,LONG>& vec)
 {	
 	for (std::list<DiaEntity*>::iterator it = m_selectedEntities.begin(); it != m_selectedEntities.end(); ++it)
 	{

@@ -98,7 +98,7 @@ bool DiaEllipse::contains(const CPoint& rpoint) const
 	}
 }
 
-void DiaEllipse::applyVec(std::pair<LONG,LONG>& vec)
+void DiaEllipse::applyVec(const std::pair<LONG,LONG>& vec)
 {
 	long dx = vec.first;
 	long dy = vec.second;

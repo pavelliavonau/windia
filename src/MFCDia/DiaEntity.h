@@ -18,7 +18,7 @@ public:
 	virtual bool contains(const CPoint&) const = 0;
 	void setSelected(bool);
 	virtual bool isSelected() const;
-	virtual void applyVec(std::pair<LONG,LONG>&) = 0;
+	virtual void applyVec(const std::pair<LONG,LONG>&) = 0;
 	virtual CPoint getCentralPoint() const = 0;
 	virtual CPoint getCrossPoint(const CPoint&, const CPoint&) const = 0;
 	virtual DiaEntity::Type type() const = 0;
@@ -33,7 +33,7 @@ protected:
 	static CPen m_penBlue;
 
 	// (C) http://users.livejournal.com/_winnie/152327.html
-	bool lineIntersection(CPoint start1, CPoint end1, CPoint start2, CPoint end2, CPoint *out_intersection) const;	
+	bool lineIntersection(const CPoint& start1, const CPoint& end1, const CPoint& start2, const CPoint& end2, CPoint *out_intersection) const;	
 
 };
 

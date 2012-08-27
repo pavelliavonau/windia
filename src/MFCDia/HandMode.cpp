@@ -59,15 +59,15 @@ void HandMode::OnLButtonUp(UINT Flags, CPoint Loc)
 	m_isTracking = false;
 }
 
-void HandMode::OnMouseMove(UINT nFlags, CPoint point)
+void HandMode::OnMouseMove(UINT nFlags, const CPoint& point)
 {
 	if ( m_isTracking )
 	{		
-		CPoint oldPoint = pullPoint();
-		std::pair<LONG,LONG> vec;
-		vec.first = point.x - oldPoint.x;
-		vec.second = point.y - oldPoint.y;
-		mp_parentView->moveSelected(vec);		
+		CPoint& oldPoint = pullPoint();
+		//std::pair<LONG,LONG> vec;
+		m_vec.first = point.x - oldPoint.x;
+		m_vec.second = point.y - oldPoint.y;
+		mp_parentView->moveSelected(m_vec);		
 		pushPoint(point);
 		mp_parentView->RedrawWindow();		
 	}

@@ -100,7 +100,7 @@ int DiaTriangle::wherePoint(double ax, double ay, double bx, double by, double p
 			return 0;	
 }
 
-void DiaTriangle::applyVec(std::pair<LONG,LONG>& vec)
+void DiaTriangle::applyVec(const std::pair<LONG,LONG>& vec)
 {
 	long dx = vec.first;
 	long dy = vec.second;

@@ -16,7 +16,7 @@ public:
 
 	void OnLButtonDown(UINT Flags, CPoint Loc);
 	void OnLButtonUp(UINT Flags, CPoint Loc);
-	void OnMouseMove(UINT nFlags, CPoint point);
+	void OnMouseMove(UINT nFlags, const CPoint& point);
 
 protected:
 	bool isEnoughtItems() const;
@@ -24,5 +24,6 @@ protected:
 
 private:
 	bool m_isTracking;
+	std::pair<LONG,LONG> m_vec;
 };
 

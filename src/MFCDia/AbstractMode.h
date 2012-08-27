@@ -19,12 +19,12 @@ public:
 	virtual void OnRButtonDown(UINT Flags, CPoint Loc);
 	virtual void OnLButtonDown(UINT Flags, CPoint Loc);
 	virtual void OnLButtonUp(UINT Flags, CPoint Loc);
-	virtual void OnMouseMove(UINT nFlags, CPoint point);
+	virtual void OnMouseMove(UINT nFlags, const CPoint& point);
 
 protected:
 
 	void pushPoint(CPoint);
-	CPoint pullPoint();
+	CPoint& pullPoint();
 	void pushEntity(DiaEntity*);
 	DiaEntity* pullEntity();
 	const std::vector<CPoint>& getPoints();

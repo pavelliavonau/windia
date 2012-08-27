@@ -30,7 +30,7 @@ public:
 	void clearDocument();	
 	bool haveSelected() const;
 	void clearSelection();
-	void moveSelected(std::pair<LONG,LONG>);
+	void moveSelected(const std::pair<LONG,LONG>&);
 	void deleteSelected();
 	bool areAlreadyConnected(const DiaEntity*, const DiaEntity*) const;
 

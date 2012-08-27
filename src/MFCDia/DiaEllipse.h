@@ -8,7 +8,7 @@ public:
 	virtual ~DiaEllipse(void);
 	void draw(CDC* pDC) const;
 	bool contains(const CPoint&) const;
-	void applyVec(std::pair<LONG,LONG>&);
+	void applyVec(const std::pair<LONG,LONG>&);
 	CPoint getCentralPoint() const;
 	CPoint getCrossPoint(const CPoint& from, const CPoint& to) const;
 	virtual DiaEntity::Type type() const { return DiaEntity::Ellipse; };
