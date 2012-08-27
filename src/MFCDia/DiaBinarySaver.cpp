@@ -94,7 +94,7 @@ void DiaBinarySaver::saveTriangle(const DiaEntity* pEntity, std::fstream& fstrea
 {
 	const DiaTriangle* pTriangle = dynamic_cast<const DiaTriangle*>(pEntity);	
 
-	block.f_int = DiaEntity::Rectangle;
+	block.f_int = DiaEntity::Triangle;
 	fstream.write(block.f_char, sizeof(block));
 	
 	block.f_int = pTriangle->id();
