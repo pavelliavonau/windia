@@ -35,8 +35,8 @@ DiaTriangle::DiaTriangle(LONG xA, LONG yA, LONG xB, LONG yB, LONG xC, LONG yC) :
 	m_yC(yC)
 {
 	
-	m_xCenter = (xC - xB) / 2;
-	m_yCenter = (yC - yA) / 2;
+	m_xCenter = xA;
+	m_yCenter = yC - (yC - yA) / 2;
 }
 
 

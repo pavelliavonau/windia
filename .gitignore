@@ -13,8 +13,11 @@
 
 src/Debug/
 src/MFCDia/Debug/
+src/Release/
+src/MFCDia/Release/
 src/MFCDia.sdf
 src/MFCDia.suo
 src/MFCDia/MFCDia.vcxproj.user
 src/MFCDia.opensdf
 *.ipch
+*.aps
