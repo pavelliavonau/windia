@@ -10,6 +10,7 @@
 
 #include "MFCDiaDoc.h"
 #include "MFCDiaView.h"
+#include "DiaGridView.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -96,7 +97,16 @@ BOOL CMFCDiaApp::InitInstance()
 	if (!pDocTemplate)
 		return FALSE;
 	AddDocTemplate(pDocTemplate);
-
+  
+	GXInit();
+  //pDocTemplate = new CSingleDocTemplate(
+  //  IDR_MAINFRAME,
+  //  RUNTIME_CLASS(CMFCDiaDoc),
+  //  RUNTIME_CLASS(CMainFrame),       // main SDI frame window
+  //  RUNTIME_CLASS(DiaGridView));
+  //if (!pDocTemplate)
+  //  return FALSE;
+  //AddDocTemplate(pDocTemplate);
 
 	// Parse command line for standard shell commands, DDE, file open
 	CCommandLineInfo cmdInfo;

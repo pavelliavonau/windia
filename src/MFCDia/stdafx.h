@@ -36,6 +36,7 @@
 
 
 
+#include <grid\gxall.h>
 
 
 

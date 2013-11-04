@@ -16,16 +16,21 @@ DiaArrow::~DiaArrow(void)
 void DiaArrow::draw(CDC* pDC) const
 {
 
+	CPen pen;
+	CPen* pOldPen;
+	pen.CreatePen(m_penStyle, 1, m_penColor);
+
 	if (m_selected)
 	{		
-		CPen* pOldPen = pDC->SelectObject(&m_penBlue);
-
-		drawArrow(pDC);
-
-		pDC->SelectObject(pOldPen);
+		pOldPen = pDC->SelectObject(&m_penBlue);
 	}
 	else
-		drawArrow(pDC);	
+	{
+		pOldPen = pDC->SelectObject(&pen);
+	}
+
+	drawArrow(pDC);
+	pDC->SelectObject(pOldPen);
 }
 
 void DiaArrow::drawArrow(CDC* pDC) const

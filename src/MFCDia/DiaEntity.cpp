@@ -4,7 +4,9 @@
 
 CPen DiaEntity::m_penBlue = CPen(PS_SOLID, 5, RGB(0, 0, 255));
 
-DiaEntity::DiaEntity(void)
+DiaEntity::DiaEntity(void) :
+	m_penColor(RGB(0,0,0)),
+	m_penStyle(PS_SOLID)
 {	
 	m_selected = false;
 }
@@ -22,6 +24,15 @@ void DiaEntity::setSelected(bool value)
 bool DiaEntity::isSelected() const
 {
 	return m_selected;
+}
+
+void DiaEntity::setCentralPoint(CPoint point)
+{
+	CPoint oldPoint = getCentralPoint();
+	std::pair<LONG,LONG> vec;
+	vec.first = point.x - oldPoint.x;
+	vec.second = point.y - oldPoint.y;
+	applyVec(vec);
 }
 
 bool DiaEntity::lineIntersection(const CPoint& start1, const CPoint& end1, const CPoint& start2, const CPoint& end2, CPoint *out_intersection) const

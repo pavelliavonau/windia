@@ -29,16 +29,22 @@ DiaRectangle::~DiaRectangle(void)
 
 void DiaRectangle::draw(CDC* pDC) const
 {
+	CPen* pOldPen;
+	
+	CPen pen;
+	pen.CreatePen(m_penStyle, 1, m_penColor);
+
 	if (m_selected)
 	{		
-		CPen* pOldPen = pDC->SelectObject(&m_penBlue);		//crashes
-
-		pDC->Rectangle(m_x1, m_y1, m_x2, m_y2);
-
-		pDC->SelectObject(pOldPen);
+		pOldPen = pDC->SelectObject(&m_penBlue);		
 	}
 	else
-		pDC->Rectangle(m_x1, m_y1, m_x2, m_y2);
+	{		
+		pOldPen = pDC->SelectObject(&pen);		
+	}
+
+	pDC->Rectangle(m_x1, m_y1, m_x2, m_y2);
+	pDC->SelectObject(pOldPen);	
 }
 
 bool DiaRectangle::contains(const CPoint& rpoint) const

@@ -159,7 +159,7 @@ void CMFCDiaView::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	if ( nChar == VK_DELETE )
 	{
 		GetDocument()->deleteSelected();
-		RedrawWindow();
+		//GetDocument()->UpdateAllViews(NULL);
 	}
 }
 
@@ -183,6 +183,7 @@ void CMFCDiaView::OnLButtonUp(UINT Flags, CPoint Loc)
 void CMFCDiaView::OnMouseMove(UINT nFlags, CPoint point)
 {
 	m_pmode->OnMouseMove(nFlags, point);
+	//GetDocument()->UpdateAllViews(NULL);
 }
 
 bool CMFCDiaView::selectEntity(const CPoint& rpoint)

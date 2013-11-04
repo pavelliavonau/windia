@@ -29,16 +29,21 @@ DiaEllipse::~DiaEllipse(void)
 
 void DiaEllipse::draw(CDC* pDC) const
 {
+	CPen pen;
+	CPen* pOldPen;
+	pen.CreatePen(m_penStyle, 1, m_penColor);
+
 	if (m_selected)
 	{		
-		CPen* pOldPen = pDC->SelectObject(&m_penBlue);
-
-		pDC->Ellipse(m_x1, m_y1, m_x2, m_y2);
-
-		pDC->SelectObject(pOldPen);
+		pOldPen = pDC->SelectObject(&m_penBlue);
 	}
 	else
-		pDC->Ellipse(m_x1, m_y1, m_x2, m_y2);
+	{
+		pOldPen = pDC->SelectObject(&pen);
+	}
+
+	pDC->Ellipse(m_x1, m_y1, m_x2, m_y2);
+	pDC->SelectObject(pOldPen);
 }
 
 bool DiaEllipse::contains(const CPoint& rpoint) const

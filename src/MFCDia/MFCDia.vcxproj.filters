@@ -106,6 +106,12 @@
     <ClInclude Include="BinaryTypes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="DiaViewFrame.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DiaGridView.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MFCDia.cpp">
@@ -172,6 +178,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="DiaBinaryLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DiaViewFrame.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DiaGridView.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

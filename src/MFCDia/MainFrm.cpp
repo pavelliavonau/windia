@@ -6,6 +6,8 @@
 #include "MFCDia.h"
 
 #include "MainFrm.h"
+#include "MFCDiaView.h"
+#include "DiaGridView.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -60,10 +62,29 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	// TODO: Delete these three lines if you don't want the toolbar to be dockable
 	m_wndToolBar.EnableDocking(CBRS_ALIGN_ANY);
 	EnableDocking(CBRS_ALIGN_ANY);
-	DockControlBar(&m_wndToolBar);
-
+	DockControlBar(&m_wndToolBar);	
 
 	return 0;
+}
+
+BOOL CMainFrame::OnCreateClient(LPCREATESTRUCT lpcs, CCreateContext* pContext)
+{
+	
+	//calculate client size
+	CRect cr;
+	GetClientRect(&cr);
+
+	if (!m_splitterWnd.CreateStatic(this, 2, 1))
+		return FALSE;
+                                          
+	if (!m_splitterWnd.CreateView(0, 0, RUNTIME_CLASS(CMFCDiaView), CSize(cr.Width() , cr.Height() / 2), pContext) ||
+		!m_splitterWnd.CreateView(1, 0, RUNTIME_CLASS(DiaGridView), CSize(cr.Width() , cr.Height() / 2), pContext) )
+	{
+		m_splitterWnd.DestroyWindow();
+		return FALSE;
+	}
+	return TRUE;
+
 }
 
 BOOL CMainFrame::PreCreateWindow(CREATESTRUCT& cs)

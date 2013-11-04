@@ -283,6 +283,7 @@ void CMFCDiaDoc::moveSelected(const std::pair<LONG,LONG>& vec)
 	{
 		(*it)->applyVec(vec);
 	}	
+	UpdateAllViews(NULL);
 }
 
 void CMFCDiaDoc::deleteSelected()
@@ -293,4 +294,5 @@ void CMFCDiaDoc::deleteSelected()
 		delete *it;					
 	}
 	m_selectedEntities.clear();
+	UpdateAllViews(NULL);
 }

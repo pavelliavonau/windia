@@ -46,18 +46,22 @@ DiaTriangle::~DiaTriangle(void)
 
 void DiaTriangle::draw(CDC* pDC) const
 {	
+
+	CPen pen;
+	CPen* pOldPen;
+	pen.CreatePen(m_penStyle, 1, m_penColor);
+
 	if (m_selected)
 	{		
-		CPen* pOldPen = pDC->SelectObject(&m_penBlue);
-
-		drawTriamgle(pDC);
-
-		pDC->SelectObject(pOldPen);
+		pOldPen = pDC->SelectObject(&m_penBlue);
 	}
 	else
 	{
-		drawTriamgle(pDC);
+		pOldPen = pDC->SelectObject(&pen);
 	}
+
+	drawTriamgle(pDC);
+	pDC->SelectObject(pOldPen);
 }
 
 void DiaTriangle::drawTriamgle(CDC* pDC) const

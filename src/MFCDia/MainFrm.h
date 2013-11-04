@@ -4,6 +4,9 @@
 
 #pragma once
 
+//#include "MFCDiaView.h"
+//#include "DiaGridView.h"
+
 class CMainFrame : public CFrameWnd
 {
 	
@@ -20,6 +23,7 @@ public:
 // Overrides
 public:
 	virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
+	virtual BOOL OnCreateClient(LPCREATESTRUCT lpcs, CCreateContext* pContext);
 
 // Implementation
 public:
@@ -32,6 +36,7 @@ public:
 protected:  // control bar embedded members
 	CToolBar          m_wndToolBar;
 	CStatusBar        m_wndStatusBar;
+	CSplitterWnd	  m_splitterWnd;
 
 // Generated message map functions
 protected:

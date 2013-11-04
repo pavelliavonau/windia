@@ -19,7 +19,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
     <UseOfMfc>Dynamic</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -50,13 +50,19 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;_GXDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MinimalRebuild>false</MinimalRebuild>
+      <UseUnicodeForAssemblerListing>
+      </UseUnicodeForAssemblerListing>
+      <AdditionalIncludeDirectories>$(ProjectDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(ProjectDir)lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <ShowProgress>LinkVerboseLib</ShowProgress>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
@@ -77,6 +83,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -114,8 +121,10 @@
     <ClInclude Include="DiaConnectionEntity.h" />
     <ClInclude Include="DiaEllipse.h" />
     <ClInclude Include="DiaEntity.h" />
+    <ClInclude Include="DiaGridView.h" />
     <ClInclude Include="DiaRectangle.h" />
     <ClInclude Include="DiaTriangle.h" />
+    <ClInclude Include="DiaViewFrame.h" />
     <ClInclude Include="EllipseMode.h" />
     <ClInclude Include="HandMode.h" />
     <ClInclude Include="IDiaLoader.h" />
@@ -140,8 +149,10 @@
     <ClCompile Include="DiaConnectionEntity.cpp" />
     <ClCompile Include="DiaEllipse.cpp" />
     <ClCompile Include="DiaEntity.cpp" />
+    <ClCompile Include="DiaGridView.cpp" />
     <ClCompile Include="DiaRectangle.cpp" />
     <ClCompile Include="DiaTriangle.cpp" />
+    <ClCompile Include="DiaViewFrame.cpp" />
     <ClCompile Include="EllipseMode.cpp" />
     <ClCompile Include="HandMode.cpp" />
     <ClCompile Include="IDiaLoader.cpp" />
